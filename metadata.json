@@ -1,0 +1,6 @@
+{
+  "name": "Cinnamon Edge – Sri Lankan Café & Restaurant Brisbane",
+  "description": "Discover authentic Sri Lankan cuisine, hoppers, kottu, fried rice and café favourites at Cinnamon Edge in Mount Gravatt East, Brisbane.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
