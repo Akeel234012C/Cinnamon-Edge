@@ -23,6 +23,9 @@ export default function OwnerCustomizerModal({
     config.openingHoursText
   );
   const [uberEatsUrl, setUberEatsUrl] = useState(config.uberEatsUrl);
+  const [bookingPlatformUrl, setBookingPlatformUrl] = useState(
+    config.bookingPlatformUrl
+  );
   const [googleReviewsUrl, setGoogleReviewsUrl] = useState(
     config.googleReviewsUrl
   );
@@ -36,6 +39,7 @@ export default function OwnerCustomizerModal({
   const handleResetClick = () => {
     setOpeningHoursText(DEFAULT_RESTAURANT_CONFIG.openingHoursText);
     setUberEatsUrl(DEFAULT_RESTAURANT_CONFIG.uberEatsUrl);
+    setBookingPlatformUrl(DEFAULT_RESTAURANT_CONFIG.bookingPlatformUrl);
     setGoogleReviewsUrl(DEFAULT_RESTAURANT_CONFIG.googleReviewsUrl);
     setGoogleRatingDisplay(DEFAULT_RESTAURANT_CONFIG.googleRatingDisplay);
     onResetConfig();
@@ -48,6 +52,7 @@ export default function OwnerCustomizerModal({
         openingHoursText.trim() ||
         'Please contact us for current opening hours.',
       uberEatsUrl: uberEatsUrl.trim() || 'https://www.ubereats.com/au',
+      bookingPlatformUrl: bookingPlatformUrl.trim(),
       googleReviewsUrl:
         googleReviewsUrl.trim() || 'https://maps.app.goo.gl/ceQtifPvpuMjhWCP7',
       googleRatingDisplay:
@@ -66,11 +71,11 @@ export default function OwnerCustomizerModal({
       role="dialog"
       aria-modal="true"
       aria-label="Restaurant Owner Settings & Content Customizer"
-      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
       onClick={onClose}
     >
       <div
-        className="max-w-lg w-full bg-[#FAF6F0] border border-[#163024]/20 rounded-xl shadow-2xl overflow-hidden"
+        className="max-w-lg w-full bg-[#FAF6F0] border border-[#163024]/20 rounded-xl shadow-2xl overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="px-6 py-4 bg-[#163024] text-[#FAF6F0] flex items-center justify-between">
@@ -92,7 +97,7 @@ export default function OwnerCustomizerModal({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
             <label
               htmlFor="owner-opening-hours"
@@ -102,16 +107,29 @@ export default function OwnerCustomizerModal({
             </label>
             <textarea
               id="owner-opening-hours"
-              rows={3}
+              rows={2}
               value={openingHoursText}
               onChange={(e) => setOpeningHoursText(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm bg-white border border-[#163024]/25 rounded-md text-[#1C1D1A]"
+              className="w-full px-3.5 py-2 text-sm bg-white border border-[#163024]/25 rounded-md text-[#1C1D1A]"
               placeholder="Please contact us for current opening hours."
             />
-            <p className="text-xs text-[#5B5E57] mt-1">
-              Until confirmed by the restaurant, defaults to &ldquo;Please
-              contact us for current opening hours.&rdquo;
-            </p>
+          </div>
+
+          <div>
+            <label
+              htmlFor="owner-booking-url"
+              className="block text-xs font-semibold text-[#163024] mb-1.5"
+            >
+              Online Booking Platform URL (Optional)
+            </label>
+            <input
+              id="owner-booking-url"
+              type="url"
+              value={bookingPlatformUrl}
+              onChange={(e) => setBookingPlatformUrl(e.target.value)}
+              placeholder="https://www.opentable.com.au/... (leave blank for phone bookings)"
+              className="w-full px-3.5 py-2 text-sm bg-white border border-[#163024]/25 rounded-md text-[#1C1D1A]"
+            />
           </div>
 
           <div>

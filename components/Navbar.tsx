@@ -5,9 +5,13 @@ import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   uberEatsUrl: string;
+  onOpenReservations: () => void;
 }
 
-export default function Navbar({ uberEatsUrl }: NavbarProps) {
+export default function Navbar({
+  uberEatsUrl,
+  onOpenReservations,
+}: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -61,16 +65,15 @@ export default function Navbar({ uberEatsUrl }: NavbarProps) {
           ))}
         </nav>
 
-        {/* Zone 3: 1 primary action on desktop, plus mobile menu toggle on small screens */}
+        {/* Zone 3: 1 primary action on desktop (Reservations), plus mobile menu toggle on small screens */}
         <div className="flex items-center gap-3 shrink-0">
-          <a
-            href={uberEatsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold tracking-wider text-[#12261D] bg-[#C89347] hover:bg-[#D6A35A] rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAF6F0]"
+          <button
+            type="button"
+            onClick={onOpenReservations}
+            className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold tracking-wider text-[#12261D] bg-[#C89347] hover:bg-[#D6A35A] rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAF6F0]"
           >
-            Order on Uber Eats
-          </a>
+            Reservations
+          </button>
 
           <button
             type="button"
@@ -103,12 +106,22 @@ export default function Navbar({ uberEatsUrl }: NavbarProps) {
               </a>
             ))}
             <div className="pt-3 flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenReservations();
+                }}
+                className="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-[#12261D] bg-[#C89347] hover:bg-[#D6A35A] rounded-md transition-colors whitespace-nowrap cursor-pointer"
+              >
+                Reservations
+              </button>
               <a
                 href={uberEatsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-[#12261D] bg-[#C89347] hover:bg-[#D6A35A] rounded-md transition-colors whitespace-nowrap"
+                className="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-medium text-[#FAF6F0] border border-[#FAF6F0]/30 hover:border-[#C89347] rounded-md transition-colors whitespace-nowrap"
               >
                 Order on Uber Eats
               </a>

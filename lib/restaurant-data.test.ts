@@ -9,6 +9,7 @@ import {
   filterMenuByCategory,
   filterGalleryByCategory,
   getCombinedMenuItems,
+  hasExternalBookingPlatform,
   validateNewMenuItemInput,
 } from './restaurant-data';
 
@@ -26,6 +27,12 @@ test('verified business details match specification exactly', () => {
   assert.equal(
     DEFAULT_RESTAURANT_CONFIG.openingHoursText,
     'Please contact us for current opening hours.'
+  );
+  assert.equal(DEFAULT_RESTAURANT_CONFIG.bookingPlatformUrl, '');
+  assert.equal(hasExternalBookingPlatform(''), false);
+  assert.equal(
+    hasExternalBookingPlatform('https://www.opentable.com.au/cinnamon-edge'),
+    true
   );
 });
 

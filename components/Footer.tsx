@@ -12,12 +12,14 @@ interface FooterProps {
   config: RestaurantConfig;
   onSelectCategory: (category: MenuCategory) => void;
   onOpenCustomizer: () => void;
+  onOpenReservations: () => void;
 }
 
 export default function Footer({
   config,
   onSelectCategory,
   onOpenCustomizer,
+  onOpenReservations,
 }: FooterProps) {
   const handleFooterCategoryClick = (category: MenuCategory) => {
     onSelectCategory(category);
@@ -144,7 +146,7 @@ export default function Footer({
             </ul>
           </div>
 
-          {/* Column 4: Contact Details & Directions */}
+          {/* Column 4: Contact Details, Reservations & Directions */}
           <div className="lg:col-span-3 space-y-3">
             <h3 className="font-display text-lg font-semibold text-[#DFB26F]">
               Visit &amp; Contact
@@ -166,19 +168,26 @@ export default function Footer({
                   {config.phoneDisplay}
                 </a>
               </p>
-              <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
+              <div className="pt-2 flex flex-wrap items-center gap-2.5 text-xs">
+                <button
+                  type="button"
+                  onClick={onOpenReservations}
+                  className="px-4 py-2 bg-[#C89347] hover:bg-[#D8A559] rounded-md text-[#12261D] font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Reservations
+                </button>
                 <a
                   href={config.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3.5 py-2 bg-white/10 hover:bg-white/15 rounded-md text-[#FAF6F0] font-medium transition-colors"
+                  className="px-3.5 py-2 bg-white/10 hover:bg-white/15 rounded-md text-[#FAF6F0] font-medium transition-colors whitespace-nowrap"
                 >
                   Get Directions
                 </a>
                 <button
                   type="button"
                   onClick={onOpenCustomizer}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#C89347]/20 hover:bg-[#C89347]/30 border border-[#C89347]/40 rounded-md text-[#DFB26F] font-medium transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#C89347]/20 hover:bg-[#C89347]/30 border border-[#C89347]/40 rounded-md text-[#DFB26F] font-medium transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <Settings2 className="w-3.5 h-3.5" />
                   <span>Owner Customizer</span>

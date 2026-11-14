@@ -10,6 +10,7 @@ import FoodGallery from '@/components/FoodGallery';
 import WhyCinnamonEdge from '@/components/WhyCinnamonEdge';
 import CustomerAndLocation from '@/components/CustomerAndLocation';
 import OwnerCustomizerModal from '@/components/OwnerCustomizerModal';
+import ReservationsModal from '@/components/ReservationsModal';
 import Footer from '@/components/Footer';
 import BackToTopButton from '@/components/BackToTopButton';
 import {
@@ -47,6 +48,7 @@ export default function CinnamonEdgePage() {
   const [activeMenuCategory, setActiveMenuCategory] =
     useState<MenuCategory>('Starters');
   const [customizerOpen, setCustomizerOpen] = useState(false);
+  const [reservationsOpen, setReservationsOpen] = useState(false);
 
   const persistConfig = (nextConfig: RestaurantConfig) => {
     setConfig(nextConfig);
@@ -89,7 +91,10 @@ export default function CinnamonEdgePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF6F0] text-[#1C1D1A]">
-      <Navbar uberEatsUrl={config.uberEatsUrl} />
+      <Navbar
+        uberEatsUrl={config.uberEatsUrl}
+        onOpenReservations={() => setReservationsOpen(true)}
+      />
 
       <main className="flex-1">
         {/* SECTION 1 – PREMIUM HERO */}
@@ -134,12 +139,21 @@ export default function CinnamonEdgePage() {
         config={config}
         onSelectCategory={setActiveMenuCategory}
         onOpenCustomizer={() => setCustomizerOpen(true)}
+        onOpenReservations={() => setReservationsOpen(true)}
       />
 
       {/* Floating Back to Top Action Button */}
       <BackToTopButton />
 
-      {/* Owner Customizer Modal for Opening Hours, Uber Eats URL & Google Reviews */}
+      {/* Reservations Visual Modal */}
+      <ReservationsModal
+        isOpen={reservationsOpen}
+        onClose={() => setReservationsOpen(false)}
+        config={config}
+        onOpenOwnerCustomizer={() => setCustomizerOpen(true)}
+      />
+
+      {/* Owner Customizer Modal for Opening Hours, Booking Link, Uber Eats URL & Google Reviews */}
       <OwnerCustomizerModal
         isOpen={customizerOpen}
         onClose={() => setCustomizerOpen(false)}

@@ -63,6 +63,7 @@ export interface RestaurantConfig {
   googleMapsUrl: string;
   googleMapsEmbedUrl: string;
   uberEatsUrl: string;
+  bookingPlatformUrl: string;
   googleReviewsUrl: string;
   googleRatingDisplay: string;
   openingHoursText: string;
@@ -114,11 +115,18 @@ export const DEFAULT_RESTAURANT_CONFIG: RestaurantConfig = {
   googleMapsEmbedUrl:
     'https://maps.google.com/maps?q=Shop%206/742%20Creek%20Road,%20Mount%20Gravatt%20East%20QLD%204122,%20Australia&t=&z=16&ie=UTF8&iwloc=&output=embed',
   uberEatsUrl: 'https://www.ubereats.com/au',
+  bookingPlatformUrl: '',
   googleReviewsUrl: 'https://maps.app.goo.gl/ceQtifPvpuMjhWCP7',
   googleRatingDisplay: 'Verified Google Business Profile · Mount Gravatt East',
   openingHoursText: 'Please contact us for current opening hours.',
   customMenuItems: [],
 };
+
+export function hasExternalBookingPlatform(url?: string): boolean {
+  if (!url) return false;
+  const trimmed = url.trim();
+  return trimmed.startsWith('http://') || trimmed.startsWith('https://');
+}
 
 export const INITIAL_VERIFIED_MENU_ITEMS: MenuItem[] = [
   // STARTERS
