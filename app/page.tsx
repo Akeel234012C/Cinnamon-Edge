@@ -11,6 +11,7 @@ import WhyCinnamonEdge from '@/components/WhyCinnamonEdge';
 import CustomerAndLocation from '@/components/CustomerAndLocation';
 import OwnerCustomizerModal from '@/components/OwnerCustomizerModal';
 import Footer from '@/components/Footer';
+import BackToTopButton from '@/components/BackToTopButton';
 import {
   DEFAULT_RESTAURANT_CONFIG,
   MenuCategory,
@@ -134,6 +135,9 @@ export default function CinnamonEdgePage() {
         onSelectCategory={setActiveMenuCategory}
         onOpenCustomizer={() => setCustomizerOpen(true)}
       />
+
+      {/* Floating Back to Top Action Button */}
+      <BackToTopButton />
 
       {/* Owner Customizer Modal for Opening Hours, Uber Eats URL & Google Reviews */}
       <OwnerCustomizerModal
